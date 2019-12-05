@@ -1,0 +1,19 @@
+{
+  "name": "miniapp-dev-cli",
+  "version": "1.0.0",
+  "description": "小程序开发脚手架",
+  "main": "index.js",
+  "scripts": {
+    "test": "miniapp-dev-cli test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arrrrray/miniapp-dev-cli.git"
+  },
+  "author": "gaojunchao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arrrrray/miniapp-dev-cli/issues"
+  },
+  "homepage": "https://github.com/Arrrrray/miniapp-dev-cli#readme"
+}
