@@ -15,7 +15,7 @@ module.exports =  async function (isDev) {
   // 目标文件
   const targetFiles = [
     {
-      prefix: '/src/config/',
+      prefix: '/config/',
       filename: 'envConfig.js'
     },
     // {
@@ -25,7 +25,6 @@ module.exports =  async function (isDev) {
   ]
   const sourceFile = isDev ? sourceFiles.dev : sourceFiles.prod
   const preText = 'module.exports = ';
-  console.log('__dirname',__dirname)
   return new Promise((resolve, reject) => {
     fs.readFile(__dirname + sourceFiles.prefix + sourceFile, (err, data) => {
       if (err) {

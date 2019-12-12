@@ -1,9 +1,9 @@
 // import inquirer from 'inquirer';
 const inquirer = require('inquirer');
 // import Log from './utils/log';
-const Log = require('./utils/log');
+const Log = require('../utils/log');
 // import switchVersion from './utils/switchVersion';
-const switchVersion = require('./switchVersion');
+const switchVersion = require('../switchVersion');
 
 const versionQuestions = [
   {
@@ -32,7 +32,6 @@ async function versionChoice() {
 };
 
 module.exports = async function (env) {
-  Log.success(env);
   if (env === 'pro') {
     switchVersion(false);
   } else if (env === 'dev') {
