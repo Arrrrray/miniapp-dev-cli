@@ -11,9 +11,21 @@
     "url": "git+https://github.com/Arrrrray/miniapp-dev-cli.git"
   },
   "author": "gaojunchao",
+  "bin": {
+    "miniapp-cli": "./index.js"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Arrrrray/miniapp-dev-cli/issues"
   },
-  "homepage": "https://github.com/Arrrrray/miniapp-dev-cli#readme"
+  "homepage": "https://github.com/Arrrrray/miniapp-dev-cli#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "babel-jest": "^24.9.0",
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "inquirer": "^7.0.0",
+    "json-format": "^1.0.1"
+  }
 }
