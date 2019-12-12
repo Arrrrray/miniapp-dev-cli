@@ -1,9 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import filePathConfig from '../config/filePathConfig';
-import Log from '../utils/log';
+// import fs from 'fs';
+const fs = require('fs');
+// import path from 'path';
+// import filePathConfig from '../config/filePathConfig';
+const filePathConfig = require('./config/filePathConfig');
+// import Log from './log';
 
-async function switchVersion(isDev) {
+module.exports =  async function (isDev) {
   // 源文件
   const sourceFiles = {
     prefix: '/config/env/',
@@ -13,7 +15,7 @@ async function switchVersion(isDev) {
   // 目标文件
   const targetFiles = [
     {
-      prefix: '/config/',
+      prefix: '/src/config/',
       filename: 'envConfig.js'
     },
     // {
@@ -23,6 +25,7 @@ async function switchVersion(isDev) {
   ]
   const sourceFile = isDev ? sourceFiles.dev : sourceFiles.prod
   const preText = 'module.exports = ';
+  console.log('__dirname',__dirname)
   return new Promise((resolve, reject) => {
     fs.readFile(__dirname + sourceFiles.prefix + sourceFile, (err, data) => {
       if (err) {
@@ -38,7 +41,7 @@ async function switchVersion(isDev) {
           let config = { baseUrl };
           let result = preText + JSON.stringify(config, null, 2);
           // 写入文件(这里只做简单的强制替换整个文件的内容)
-          fs.writeFileSync(configPath.dir_root + item.prefix + item.filename, result, 'utf-8', (err) => {
+          fs.writeFileSync(filePathConfig.dir_root + item.prefix + item.filename, result, 'utf-8', (err) => {
             if (err) {
               throw new Error(`error occurs when reading file ${sourceFile}. Error detail: ${err}`)
               process.exit(1)
@@ -51,4 +54,4 @@ async function switchVersion(isDev) {
   })
 }
 
-export default switchVersion;
+// export default switchVersion;

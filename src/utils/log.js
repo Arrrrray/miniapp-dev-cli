@@ -1,6 +1,7 @@
-import chalk from 'chalk';
+// import chalk from 'chalk';
+const chalk = require('chalk');
 
-export default {
+module.exports = {
   success(msg) {
     console.log(chalk.green(`>> ${msg}`));
   },

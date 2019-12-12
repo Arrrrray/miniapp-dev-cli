@@ -1,17 +1,17 @@
-// 从package.json读取cliVersion
-import { version as cliVersion } from './package.json';
+const version = require('./package').version;
 // 引入commander
-import program from 'commander';
+const program = require('commander');
 // 引入创建项目文件方法
-import createComponent from './lib/createComponent';
+const createComponent = require('./src/createComponent');
 // 引入创建页面方法
-import createPage from './lib/createPage';
+const createPage = require('./src/createPage');
 // 引入切换预览方法
-import preview from './lib/preview';
+const preview = require('./src/preview');
 // 引入发布版本方法
-import publish from './lib/publish';
+const publish = require('./src/publish');
 
-
+// 设置版本号
+program.version(version, '-v, --version');
 /* 后续可以根据不同的命令进行不同的处理，可以简单的理解为路由 */
 
 // 创建组件命令
@@ -28,7 +28,7 @@ program
 
 // 预览命令
 program
-  .command('preview')
+  .command('preview [env]')
   .description('预览项目')
   .action((cmd) => preview(cmd));
 
@@ -38,7 +38,6 @@ program
   .description('发布项目')
   .action((cmd) => publish(cmd));
 
-// 设置版本号
-program.version(cliVersion, '-v, --version');
+
 
 program.parse(process.argv)

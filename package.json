@@ -1,10 +1,11 @@
 {
   "name": "miniapp-dev-cli",
-  "version": "1.0.0",
+  "version": "1.0.14",
   "description": "小程序开发脚手架",
   "main": "index.js",
   "scripts": {
-    "test": "miniapp-dev-cli test"
+    "test": "jest",
+    "preview": "miniapp-cli preview"
   },
   "repository": {
     "type": "git",
@@ -20,12 +21,21 @@
   },
   "homepage": "https://github.com/Arrrrray/miniapp-dev-cli#readme",
   "devDependencies": {
+    "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
     "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "json-format": "^1.0.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0",
+    "@moyuyc/inquirer-autocomplete-prompt": "^1.3.2",
     "chalk": "^3.0.0",
     "commander": "^4.0.1",
-    "inquirer": "^7.0.0",
-    "json-format": "^1.0.1"
+    "core-js": "^3.5.0",
+    "cross-spawn": "^7.0.1",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^7.0.0"
   }
 }
