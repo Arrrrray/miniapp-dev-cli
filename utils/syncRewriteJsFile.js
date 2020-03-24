@@ -1,5 +1,5 @@
 const fs = require("fs");
-const Log = require("../log"); // 控制台输出
+const Log = require("./log"); // 控制台输出
 
 // 异步写文件
 module.exports = async function (filepath, text, tips, format) {

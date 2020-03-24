@@ -1,9 +1,10 @@
 const inquirer = require('inquirer'); // 启动交互命令行
 const spawn = require('cross-spawn'); // 开启子进程
-const Config = require('../config'); // 配置项
-const Log = require("../log"); // 控制台输出
-const asyncRewriteJsonFile = require("../util/asyncRewriteJsonFile");
-const syncRewriteJsFile = require("../util/syncRewriteJsFile");
+const Config = require('../config/filePathConfig'); // 配置项
+const Log = require("../utils/log"); // 控制台输出
+const asyncRewriteJsonFile = require("../utils/asyncRewriteJsonFile");
+const syncRewriteJsFile = require("../utils/syncRewriteJsFile");
+const switchFunc = require('../switchVersion');
 
 function getQuestion({
   version,
@@ -60,7 +61,7 @@ module.exports = async function () {
 
   // 不输入版本号会默认使用上次的版本号
   if (answer.version == '') answer.version = versionConfig.version;
-  const switchFunc = require('../switch');
+
   switchFunc(answer.isRelease).then(() => {
     if (answer.isRelease) {
       answer.versionDesc = `正式：${answer.versionDesc}`;
