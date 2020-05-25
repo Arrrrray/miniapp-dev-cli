@@ -1,8 +1,8 @@
 {
   "name": "miniapp-dev-cli",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "小程序开发脚手架",
-  "versionDesc": "正式：功能进化",
+  "versionDesc": "正式：修复上传bug",
   "main": "index.js",
   "scripts": {
     "test": "jest",

@@ -5,7 +5,7 @@ const fs = require('fs');
 const filePathConfig = require('./config/filePathConfig');
 // import Log from './log';
 
-module.exports =  async function (isDev) {
+module.exports = async function (isRelease) {
   // 源文件
   const sourceFiles = {
     prefix: '/config/env/',
@@ -23,7 +23,7 @@ module.exports =  async function (isDev) {
     // filename: 'gioConfig.js'
     // }
   ]
-  const sourceFile = isDev ? sourceFiles.dev : sourceFiles.prod
+  const sourceFile = isRelease ? sourceFiles.prod : sourceFiles.dev
   const preText = 'module.exports = ';
   return new Promise((resolve, reject) => {
     fs.readFile(__dirname + sourceFiles.prefix + sourceFile, (err, data) => {
@@ -52,5 +52,3 @@ module.exports =  async function (isDev) {
     })
   })
 }
-
-// export default switchVersion;

@@ -3,7 +3,7 @@ const spawn = require('cross-spawn'); // 开启子进程
 const Config = require('../config/filePathConfig'); // 配置项
 const Log = require("../utils/log"); // 控制台输出
 const asyncRewriteJsonFile = require("../utils/asyncRewriteJsonFile");
-const syncRewriteJsFile = require("../utils/syncRewriteJsFile");
+// const syncRewriteJsFile = require("../utils/syncRewriteJsFile");
 const switchFunc = require('../switchVersion');
 
 function getQuestion({
@@ -85,13 +85,13 @@ module.exports = async function () {
       }
     });
 
-    // 修改upload.version.js文件
-    let text = 'module.exports = ' + JSON.stringify(versionConfig);
-    syncRewriteJsFile(versionPath, text, 'upload.version.js文件修改成功！！！', 'utf-8').then(res => {
-      // if (res.code === 1) {
-      //   Log.success('upload.version.js文件修改成功！！！');
-      // }
-    });
+    // // 修改upload.version.js文件
+    // let text = 'module.exports = ' + JSON.stringify(versionConfig);
+    // syncRewriteJsFile(versionPath, text, 'upload.version.js文件修改成功！！！', 'utf-8').then(res => {
+    //   // if (res.code === 1) {
+    //   //   Log.success('upload.version.js文件修改成功！！！');
+    //   // }
+    // });
 
     // success tips
     Log.success(`上传体验版成功, 登录微信公众平台 https://mp.weixin.qq.com 获取体验版二维码`);
