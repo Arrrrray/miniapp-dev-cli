@@ -4,7 +4,7 @@ const Config = require('../config/filePathConfig'); // 配置项
 const Log = require("../utils/log"); // 控制台输出
 const asyncRewriteJsonFile = require("../utils/asyncRewriteJsonFile");
 // const syncRewriteJsFile = require("../utils/syncRewriteJsFile");
-const switchFunc = require('../switchVersion');
+const switchFunc = require('../utils/switchVersion');
 
 function getQuestion({
   version,
@@ -20,14 +20,14 @@ function getQuestion({
   {
     type: 'input',
     name: 'version',
-    message: `版本号(当前版本号:${version}):`,
+    message: `请输入版本号(当前版本号:${version}):`,
     default: version
   },
   // 设置上传描述
   {
     type: 'input',
     name: 'versionDesc',
-    message: `写一个简单的介绍来描述这个版本的改动:`,
+    message: `请写一个简单的介绍来描述这个版本的改动:`,
     default: versionDesc
   }];
 }
@@ -46,8 +46,6 @@ module.exports = async function () {
   // 版本package文件路径    
   const packageConfPath = `${Config.dir_root}/package.json`;
 
-  const versionPath = `${Config.dir_root}/upload.version.js`;
-
   //  获取package配置
   const packageConf = require(packageConfPath);
 
@@ -56,7 +54,7 @@ module.exports = async function () {
     versionDesc: packageConf.versionDesc,
   }
 
-  // 开始执行
+  // 开始执行，需要用户确认上传正式环境/测试环境，输入版本号，版本描述等信息
   let answer = await inquirer.prompt(getQuestion(versionConfig));
 
   // 不输入版本号会默认使用上次的版本号
@@ -71,8 +69,12 @@ module.exports = async function () {
     versionConfig.version = answer.version;
     versionConfig.versionDesc = answer.versionDesc;
 
-    //上传体验版
-    let res = spawn.sync(cli, ['-u', `${versionConfig.version}@${Config.dir_root}`, '--upload-desc', versionConfig.versionDesc], {
+    //上传体验版v1
+    // let res = spawn.sync(cli, ['-u', `${versionConfig.version}@${Config.dir_root}`, '--upload-desc', versionConfig.versionDesc], {
+    //   stdio: 'inherit'
+    // });
+    // 上传体验版v2
+    let res = spawn.sync(cli, ['upload', '--project', `${Config.dir_root}`, '-v', `${versionConfig.version}`, '-d', versionConfig.versionDesc], {
       stdio: 'inherit'
     });
     if (res.status !== 0) process.exit(1);
@@ -84,14 +86,6 @@ module.exports = async function () {
         Log.success('package.json文件修改成功！！！');
       }
     });
-
-    // // 修改upload.version.js文件
-    // let text = 'module.exports = ' + JSON.stringify(versionConfig);
-    // syncRewriteJsFile(versionPath, text, 'upload.version.js文件修改成功！！！', 'utf-8').then(res => {
-    //   // if (res.code === 1) {
-    //   //   Log.success('upload.version.js文件修改成功！！！');
-    //   // }
-    // });
 
     // success tips
     Log.success(`上传体验版成功, 登录微信公众平台 https://mp.weixin.qq.com 获取体验版二维码`);

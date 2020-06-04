@@ -1,14 +1,14 @@
 // import fs from 'fs';
 const fs = require('fs');
-// import path from 'path';
+const path = require('path');
 // import filePathConfig from '../config/filePathConfig';
-const filePathConfig = require('./config/filePathConfig');
+const filePathConfig = require('../config/filePathConfig');
 // import Log from './log';
 
 module.exports = async function (isRelease) {
   // 源文件
   const sourceFiles = {
-    prefix: '/config/env/',
+    prefix: `${path.join(__dirname, '../config/env/')}`,
     dev: 'dev.json',
     prod: 'prod.json'
   }
@@ -18,15 +18,11 @@ module.exports = async function (isRelease) {
       prefix: '/config/',
       filename: 'envConfig.js'
     },
-    // {
-    // prefix: '/utils/growingio',
-    // filename: 'gioConfig.js'
-    // }
   ]
   const sourceFile = isRelease ? sourceFiles.prod : sourceFiles.dev
   const preText = 'module.exports = ';
   return new Promise((resolve, reject) => {
-    fs.readFile(__dirname + sourceFiles.prefix + sourceFile, (err, data) => {
+    fs.readFile(sourceFiles.prefix + sourceFile, (err, data) => {
       if (err) {
         throw new Error(`Error occurs when reading file ${sourceFile}.\nError detail: ${err}`)
         process.exit(1)

@@ -9,8 +9,8 @@ const program = require('commander'); // 命令行解析
 /* = task events
 -------------------------------------------------------------- */
 const createProgramFs = require('./src/createComponent'); // 创建项目文件
-const publishWeapp = require('./src/publish'); // 创建项目文件
-const previewWeapp = require('./src/preview'); // 创建项目文件
+const uploadApp = require('./src/upload'); // 创建项目文件
+const previewApp = require('./src/preview'); // 创建项目文件
 
 
 /* = config
@@ -28,14 +28,14 @@ program
   .action((cmd) => createProgramFs(cmd));
 
 program
-  .command('publish')
+  .command('upload')
   .description('发布体验版')
-  .action((cmd) => publishWeapp(cmd));
+  .action((cmd) => uploadApp(cmd));
 
 program
   .command('preview [env]')
   .description('预览')
-  .action((env) => previewWeapp(env));
+  .action((env) => previewApp(env));
 
 /* 后续可以根据不同的命令进行不同的处理，可以简单的理解为路由 */
 // program

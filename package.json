@@ -1,42 +1,42 @@
 {
-  "name": "miniapp-dev-cli",
-  "version": "1.1.6",
-  "description": "小程序开发脚手架",
-  "versionDesc": "正式：修复上传bug",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "preview": "miniapp-cli preview"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Arrrrray/miniapp-dev-cli.git"
-  },
-  "author": "gaojunchao",
-  "bin": {
-    "miniapp-cli": "./index.js"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Arrrrray/miniapp-dev-cli/issues"
-  },
-  "homepage": "https://github.com/Arrrrray/miniapp-dev-cli#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
-    "babel-jest": "^24.9.0",
-    "jest": "^24.9.0"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.7.0",
-    "@moyuyc/inquirer-autocomplete-prompt": "^1.3.2",
-    "chalk": "^3.0.0",
-    "commander": "^4.0.1",
-    "core-js": "^3.5.0",
-    "cross-spawn": "^7.0.1",
-    "fuzzy": "^0.1.3",
-    "inquirer": "^7.0.0",
-    "json-format": "^1.0.1"
-  }
+	"name": "miniapp-dev-cli",
+	"version": "1.1.8",
+	"description": "小程序开发脚手架",
+	"versionDesc": "修改方法路径，完善文档",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest",
+		"preview": "miniapp-cli preview"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Arrrrray/miniapp-dev-cli.git"
+	},
+	"author": "gaojunchao",
+	"bin": {
+		"miniapp-cli": "./index.js"
+	},
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Arrrrray/miniapp-dev-cli/issues"
+	},
+	"homepage": "https://github.com/Arrrrray/miniapp-dev-cli#readme",
+	"devDependencies": {
+		"@babel/cli": "^7.7.5",
+		"@babel/core": "^7.7.5",
+		"@babel/preset-env": "^7.7.6",
+		"babel-jest": "^26.0.1",
+		"jest": "^26.0.1"
+	},
+	"dependencies": {
+		"@babel/polyfill": "^7.7.0",
+		"@moyuyc/inquirer-autocomplete-prompt": "^1.3.2",
+		"chalk": "^3.0.0",
+		"commander": "^4.0.1",
+		"core-js": "^3.5.0",
+		"cross-spawn": "^7.0.1",
+		"fuzzy": "^0.1.3",
+		"inquirer": "^7.0.0",
+		"json-format": "^1.0.1"
+	}
 }
