@@ -68,11 +68,14 @@ const upload = async () => {
     }
     versionConfig.version = answer.version;
     versionConfig.versionDesc = answer.versionDesc;
+    //上传体验版v1
+    // let res = spawn.sync(cli, ['-u', `${versionConfig.version}@${Config.dir_root}`, '--upload-desc', versionConfig.versionDesc], {
+    //   stdio: 'inherit'
+    // });
     // 上传体验版v2
-    let res = spawn.sync(cli, ['upload', '--project', `${Config.dir_root}`, '-v', `${versionConfig.version}`, '-d', versionConfig.versionDesc], {
+    spawn.sync(cli, ['upload', '--project', `${Config.dir_root}`, '--version', `${versionConfig.version}`, '--desc', versionConfig.versionDesc], {
       stdio: 'inherit'
     });
-    if (res.status !== 0) process.exit(1);
     Log.success('上传成功...');
 
     // 修改本地package.json文件 (当为发行版时)

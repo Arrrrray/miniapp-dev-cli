@@ -1,8 +1,8 @@
 {
   "name": "miniapp-dev-cli",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "小程序开发脚手架",
-  "versionDesc": "升级官方脚手架版本，修改上传命令，publish改为upload",
+  "versionDesc": "修改v2开发者工具",
   "main": "index.js",
   "scripts": {
     "test": "jest",
