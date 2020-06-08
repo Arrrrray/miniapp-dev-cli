@@ -2,9 +2,9 @@ const inquirer = require('inquirer'); // 启动交互命令行
 const spawn = require('cross-spawn'); // 开启子进程
 const Config = require('../config/filePathConfig'); // 配置项
 const Log = require("../utils/log"); // 控制台输出
-const asyncRewriteJsonFile = require("../utils/asyncRewriteJsonFile");
-// const syncRewriteJsFile = require("../utils/syncRewriteJsFile");
-const switchFunc = require('../utils/switchVersion');
+const jsonFormat = require("json-format"); // json格式化
+const fsPromises = require('fs').promises;
+const switchVersion = require('../utils/switchVersion');
 
 function getQuestion({
   version,
@@ -32,7 +32,7 @@ function getQuestion({
   }];
 }
 // exec('"C:\Program Files (x86)\Tencent\微信web开发者?工具\微信开发者工具.exe"');
-module.exports = async function () {
+const upload = async () => {
   let idePath; //ide路径
   let cli; //官方提供的脚手架路径
   // ide路径 判断不同的平台得到不同的ide地址
@@ -60,7 +60,7 @@ module.exports = async function () {
   // 不输入版本号会默认使用上次的版本号
   if (answer.version == '') answer.version = versionConfig.version;
 
-  switchFunc(answer.isRelease).then(() => {
+  switchVersion(answer.isRelease).then(() => {
     if (answer.isRelease) {
       answer.versionDesc = `正式：${answer.versionDesc}`;
     } else {
@@ -68,11 +68,6 @@ module.exports = async function () {
     }
     versionConfig.version = answer.version;
     versionConfig.versionDesc = answer.versionDesc;
-
-    //上传体验版v1
-    // let res = spawn.sync(cli, ['-u', `${versionConfig.version}@${Config.dir_root}`, '--upload-desc', versionConfig.versionDesc], {
-    //   stdio: 'inherit'
-    // });
     // 上传体验版v2
     let res = spawn.sync(cli, ['upload', '--project', `${Config.dir_root}`, '-v', `${versionConfig.version}`, '-d', versionConfig.versionDesc], {
       stdio: 'inherit'
@@ -81,13 +76,13 @@ module.exports = async function () {
     Log.success('上传成功...');
 
     // 修改本地package.json文件 (当为发行版时)
-    asyncRewriteJsonFile(packageConfPath, packageConf, versionConfig).then(res => {
-      if (res.code === 1) {
-        Log.success('package.json文件修改成功！！！');
-      }
+    // 使用fsPromises写文件
+    fsPromises.writeFile(packageConfPath, jsonFormat({ ...packageConf, ...versionConfig })).then(res => {
+      Log.success('package.json文件修改成功！！！');
     });
 
     // success tips
     Log.success(`上传体验版成功, 登录微信公众平台 https://mp.weixin.qq.com 获取体验版二维码`);
   });
-};
+}
+module.exports = upload;

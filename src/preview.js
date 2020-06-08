@@ -1,8 +1,5 @@
-// import inquirer from 'inquirer';
 const inquirer = require('inquirer');
-// import Log from './utils/log';
 const Log = require('../utils/log');
-// import switchVersion from './utils/switchVersion';
 const switchVersion = require('../utils/switchVersion');
 
 const versionQuestions = [
