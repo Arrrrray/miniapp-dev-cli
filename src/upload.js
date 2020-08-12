@@ -40,7 +40,8 @@ const upload = async () => {
     cli = "C:/\Program Files (x86)/\Tencent/\微信web开发者工具/\cli.bat";
   } else {
     idePath = '/Applications/wechatwebdevtools.app/';
-    cli = `${idePath}/Contents/Resources/app.nw/bin/cli`;
+    // cli = `${idePath}/Contents/Resources/app.nw/bin/cli`;
+    cli = `${idePath}/Contents/MacOS/cli`;
   }
 
   // 版本package文件路径    
@@ -73,7 +74,8 @@ const upload = async () => {
     //   stdio: 'inherit'
     // });
     // 上传体验版v2
-    spawn.sync(cli, ['upload', '--project', `${Config.dir_root}`, '--version', `${versionConfig.version}`, '--desc', versionConfig.versionDesc], {
+    Log.success(`${cli} upload --project'${Config.dir_root} -v ${versionConfig.version} -d ${versionConfig.versionDesc}`);
+    spawn.sync(cli, ['upload', '--project', `${Config.dir_root}`, '-v', `${versionConfig.version}`, '-d', versionConfig.versionDesc], {
       stdio: 'inherit'
     });
     Log.success('上传成功...');
