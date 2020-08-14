@@ -9,6 +9,7 @@ const program = require('commander'); // 命令行解析
 /* = task events
 -------------------------------------------------------------- */
 const createProgramFs = require('./src/createComponent'); // 创建项目文件
+const setting = require('./src/setting'); // 创建项目文件
 const uploadApp = require('./src/upload'); // 创建项目文件
 const previewApp = require('./src/preview'); // 创建项目文件
 
@@ -23,6 +24,11 @@ program.version(version, '-v, --version');
 -------------------------------------------------------------- */
 
 program
+  .command('setting')
+  .description('设置命令行工具安装位置')
+  .action((cmd) => setting(cmd));
+
+  program
   .command('create')
   .description('创建页面或组件')
   .action((cmd) => createProgramFs(cmd));
